@@ -18,8 +18,8 @@ def main():
     predictions = lm.predict(X_test)
     data_dict = {"MAE":metrics.mean_absolute_error(y_test, predictions),"MSE":metrics.mean_squared_error(y_test, predictions),"RMSE":np.sqrt(metrics.mean_squared_error(y_test, predictions))}
     data_df = pd.DataFrame(data_dict,index=[0])
-    data_df.to_csv('/Golem/output/mse_data.csv')
-    coeff_df.to_csv('/Golem/output/coefficient_data.csv')  
+    data_df.to_csv('output/mse_data.csv')
+    coeff_df.to_csv('output/coefficient_data.csv')  
 
 
 main()
