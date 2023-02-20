@@ -13,13 +13,13 @@ import sys
 async def worker(ctx: WorkContext, tasks: AsyncIterable[Task]):
     script = ctx.new_script(timeout=timedelta(minutes=10))
     script.upload_file('USA_Housing.csv','/Golem/input/USA_Housing.csv')
-
+    
     async for task in tasks:
         future_result = script.run("/bin/bash", "-c", "chmod 777 /code/run-model.sh && chmod +x /code/run-model.sh")
         # future_result = script.run("/code/run-model.sh")
         # future_result = script.run("/bin/bash", "-c", "/code/run-model.sh")
-        future_result.download_file(f"/code/output/mse_data.csv", "output/mse_data.csv")
-        future_result.download_file(f"/code/output/coefficient_data.csv", "output/coefficient_data.csv")
+        script.download_file(f"/bin/bash/Golem/output/mse_data.csv", "output/mse_data.csv")
+        script.download_file(f"/bin/bash/Golem/output/coefficient_data.csv", "output/coefficient_data.csv")
         yield script
         task.accept_result(result=await future_result)
 
